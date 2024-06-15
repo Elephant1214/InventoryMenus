@@ -26,7 +26,7 @@ class InventoryMenuImpl(
 ) : InventoryMenu, Listener {
     override val id: UUID = UUID.randomUUID()
     override lateinit var inventory: Inventory
-    override val slots = HashMap<Int, Slot>(1)
+    override val slots = HashMap<Int, Slot>(this.size)
     private val closeListeners = mutableListOf<InventoryCloseEvent.() -> Unit>()
 
     init {
@@ -42,7 +42,7 @@ class InventoryMenuImpl(
     }
 
     override fun fill(stack: ItemStack) {
-        for (i in 0 until this.size) {
+        for (i in 0 until this.size - 1) {
             val value: Slot? = this.slots[i]
             if (value == null) {
                 this.slot(i, stack)

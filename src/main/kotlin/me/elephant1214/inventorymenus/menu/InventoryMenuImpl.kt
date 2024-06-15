@@ -42,7 +42,7 @@ class InventoryMenuImpl(
     }
 
     override fun fill(stack: ItemStack) {
-        for (i in 0 until this.size - 1) {
+        for (i in 0 until this.size) {
             val value: Slot? = this.slots[i]
             if (value == null) {
                 this.slot(i, stack)

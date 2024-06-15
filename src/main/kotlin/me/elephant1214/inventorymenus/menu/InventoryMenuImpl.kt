@@ -104,13 +104,15 @@ class InventoryMenuImpl(
 
     @EventHandler
     private fun onInvClose(event: InventoryCloseEvent) {
-        if (!this.allowClose.invoke()) {
-            this.owner.openInventory(this.inventory)
-            return
+        if (InventoryMenus.menus.contains(this.id) && event.inventory == this.inventory && event.view.title() == this.title) {
+            if (!this.allowClose.invoke()) {
+                this.owner.openInventory(this.inventory)
+                return
+            }
+
+            this.closeListeners.forEach { it(event) }
+            if (event.view.player == this.owner && InventoryMenus.menus.contains(this.id)) InventoryMenus.menus.remove(this.id)
         }
-        
-        this.closeListeners.forEach { it(event) }
-        if (event.view.player == this.owner && InventoryMenus.menus.contains(this.id)) InventoryMenus.menus.remove(this.id)
     }
     
     @EventHandler

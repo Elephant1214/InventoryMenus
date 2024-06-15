@@ -4,7 +4,6 @@ plugins {
     idea
     `maven-publish`
     kotlin("jvm") version("1.9.24")
-    kotlin("plugin.serialization") version("1.9.24")
     id("io.papermc.paperweight.userdev") version("1.7.1")
 }
 
@@ -34,13 +33,20 @@ tasks {
         options.release = 21
     }
     withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = "21"
-            freeCompilerArgs += "-opt-in=kotlin.io.path.ExperimentalPathApi"
-            freeCompilerArgs += "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
-        }
+        kotlinOptions.jvmTarget = "21"
     }
     javadoc {
         options.encoding = Charsets.UTF_8.name()
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
+            from(components["kotlin"])
+        }
     }
 }

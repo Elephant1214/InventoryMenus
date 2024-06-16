@@ -5,7 +5,6 @@ import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
-import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
@@ -26,6 +25,8 @@ interface InventoryMenu {
     
     val slots: MutableMap<Int, out Slot>
 
+    val allowClose: () -> Boolean
+
     fun slot(slot: Int, stack: ItemStack, handler: InventoryClickEvent.() -> Unit)
     
     fun slot(slot: Int, stack: ItemStack)
@@ -37,6 +38,8 @@ interface InventoryMenu {
     fun onClose(handler: InventoryCloseEvent.() -> Unit)
     
     fun close()
+    
+    fun invokeCloseListeners(event: InventoryCloseEvent)
     
     fun destroy()
 }

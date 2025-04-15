@@ -20,7 +20,7 @@ class Element private constructor(
         var isButton: Boolean = true
         var clickHandler: (InventoryClickEvent.() -> Unit)? = null
 
-        fun stack(builder: () -> ItemStack) {
+        inline fun stack(builder: () -> ItemStack) {
             stack = builder.invoke()
         }
 
@@ -28,7 +28,7 @@ class Element private constructor(
     }
 
     companion object {
-        fun build(init: Builder.() -> Unit): Element {
+        inline fun build(init: Builder.() -> Unit): Element {
             return Builder().apply(init).build()
         }
     }

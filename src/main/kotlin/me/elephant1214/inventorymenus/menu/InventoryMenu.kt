@@ -185,7 +185,7 @@ class InventoryMenu private constructor(
     }
 
     companion object {
-        fun build(size: Int, init: Builder.() -> Unit): InventoryMenu {
+        inline fun build(size: Int, init: Builder.() -> Unit): InventoryMenu {
             return Builder(size).apply(init).build()
         }
     }

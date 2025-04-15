@@ -9,13 +9,12 @@ plugins {
 }
 
 group = "me.elephant1214.inventorymenus"
-version = "1.0.0"
+version = "1.0.1"
 
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
 
 repositories {
     mavenCentral()
-    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
